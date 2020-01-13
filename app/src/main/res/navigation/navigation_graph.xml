@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/materialCalculatorFragment">
+    <fragment
+        android:id="@+id/materialCalculatorFragment"
+        android:name="com.tsnanh.calculator.MaterialCalculatorFragment"
+        android:label="Material Design"
+        tools:layout="@layout/fragment_material_calculator" />
+    <fragment
+        android:id="@+id/IOSCalculatorFragment"
+        android:name="com.tsnanh.calculator.IOSCalculatorFragment"
+        android:label="iOS Design"
+        tools:layout="@layout/fragment_ios_calculator" />
+    <fragment
+        android:id="@+id/customCalculatorFragment"
+        android:name="com.tsnanh.calculator.CustomCalculatorFragment"
+        android:label="Custom Design"
+        tools:layout="@layout/fragment_custom_calculator" />
+</navigation>
