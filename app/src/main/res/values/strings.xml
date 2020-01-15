@@ -23,4 +23,7 @@
     <string name="material">Material</string>
     <string name="custom">Custom</string>
     <string name="ios">iOS</string>
+    <string name="backscape">⌫</string>
+    <string name="ac">AC</string>
+    <string name="negative">+/-</string>
 </resources>

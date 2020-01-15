@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_ios_calculator.view.*
+import java.text.DecimalFormat
 
 
 class IOSCalculatorFragment : Fragment(), View.OnClickListener {
@@ -106,27 +108,27 @@ class IOSCalculatorFragment : Fragment(), View.OnClickListener {
                 else -> {
                     var1 = twMonitor2.text.toString().toFloat()
                     var2 = twMonitor.text.toString().toFloat()
-                    when {
-                        pt === "+" -> {
+                    when (pt) {
+                        "+" -> {
                             varResult = var1!! + var2!!
                             twMonitor2.text = java.lang.String.valueOf(format(varResult!!))
                             twVar.text = ""
                             twMonitor.text = ""
                         }
-                        pt === "-" -> {
+                        "-" -> {
                             varResult = var1!! - var2!!
                             twMonitor2.text = java.lang.String.valueOf(format(varResult!!))
                             twVar.text = ""
                             twMonitor.text = ""
                         }
-                        pt === "*" -> {
-                            varResult = var1?.times(var2!!)
+                        "*" -> {
+                            varResult = var1!!.times(var2!!)
                             twMonitor2.text = java.lang.String.valueOf(format(varResult!!))
                             twVar.text = ""
                             twMonitor.text = ""
                         }
-                        pt === "/" -> {
-                            varResult = var1?.div(var2!!)
+                        "/" -> {
+                            varResult = var1!!.div(var2!!)
                             twMonitor2.text = java.lang.String.valueOf(format(varResult!!))
                             twVar.text = ""
                             twMonitor.text = ""
@@ -137,10 +139,39 @@ class IOSCalculatorFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun format(d: Float) = d.toDouble() % 100 == 0.0
+    private fun format(d: Float): String {
+        val decimalFormat = DecimalFormat("###.##")
+        return decimalFormat.format(d)
+    }
 
     override fun onClick(v: View?) {
         val id = v!!.id
+        if (id == R.id.btn_dot) {
+            if (twMonitor.text.isEmpty()
+                    || (twMonitor.text.last() == '+'
+                            || twMonitor.text.last() == '-'
+                            || twMonitor.text.last() == '*'
+                            || twMonitor.text.last() == '/')) twMonitor.text = "0."
+            else {
+                if (twMonitor.text.last() != '.') {
+                    twMonitor.append(".")
+                }
+            }
+        }
+        if (id == R.id.btn_percent) {
+            if (twMonitor.text.isNotEmpty()) {
+                if (twMonitor.text.last() == '+'
+                        || twMonitor.text.last() == '-'
+                        || twMonitor.text.last() == '*'
+                        || twMonitor.text.last() == '/'
+                        || twMonitor.text.last() == '.') {
+                    Toast.makeText(this.activity!!, "Syntax Error", Toast.LENGTH_LONG).show()
+                } else {
+                    val result = twMonitor.text.toString().toFloat() / 100
+                    twMonitor.text = result.toString()
+                }
+            }
+        }
         if (id == R.id.btn_zero) {
             if (b) {
                 twMonitor.text = ""
@@ -226,7 +257,7 @@ class IOSCalculatorFragment : Fragment(), View.OnClickListener {
                 } else if (var2 == null) {
                     var2 = twMonitor.text.toString().toFloat()
                     varResult = var1!! + var2!!
-                    twMonitor2.text = format(varResult!!).toString()
+                    twMonitor2.text = format(varResult!!)
                     twMonitor.text = ""
                     var1 = varResult
                     twVar.text = "+"
@@ -239,7 +270,8 @@ class IOSCalculatorFragment : Fragment(), View.OnClickListener {
         }
         if (id == R.id.btn_sub) {
             if (twMonitor.text.toString().isNotEmpty()) {
-                if (twMonitor.text.toString().isNotEmpty() && twMonitor2.text.toString().isNotEmpty()) {
+                if (twMonitor.text.toString().isNotEmpty()
+                        && twMonitor2.text.toString().isNotEmpty()) {
                     result(1)
                     twVar.text = "-"
                     var1 = varResult
@@ -252,7 +284,7 @@ class IOSCalculatorFragment : Fragment(), View.OnClickListener {
                 } else if (var2 == null) {
                     var2 = twMonitor.text.toString().toFloat()
                     varResult = var1!! - var2!!
-                    twMonitor2.text = format(varResult!!).toString()
+                    twMonitor2.text = format(varResult!!)
                     twMonitor.text = ""
                     var1 = varResult
                     twVar.text = "-"
@@ -265,7 +297,8 @@ class IOSCalculatorFragment : Fragment(), View.OnClickListener {
         }
         if (id == R.id.btn_mul) {
             if (twMonitor.text.toString().isNotEmpty()) {
-                if (twMonitor.text.toString().isNotEmpty() && twMonitor2.text.toString().isNotEmpty()) {
+                if (twMonitor.text.toString().isNotEmpty()
+                        && twMonitor2.text.toString().isNotEmpty()) {
                     result(1)
                     twVar.text = "*"
                     var1 = varResult
@@ -278,7 +311,7 @@ class IOSCalculatorFragment : Fragment(), View.OnClickListener {
                 } else if (var2 == null) {
                     var2 = twMonitor.text.toString().toFloat()
                     varResult = var1!! * var2!!
-                    twMonitor2.text = format(varResult!!).toString()
+                    twMonitor2.text = format(varResult!!)
                     twMonitor.text = ""
                     var1 = varResult
                     twVar.text = "*"
@@ -291,7 +324,8 @@ class IOSCalculatorFragment : Fragment(), View.OnClickListener {
         }
         if (id == R.id.btn_div) {
             if (twMonitor.text.toString().isNotEmpty()) {
-                if (twMonitor.text.toString().isNotEmpty() && twMonitor2.text.toString().isNotEmpty()) {
+                if (twMonitor.text.toString().isNotEmpty()
+                        && twMonitor2.text.toString().isNotEmpty()) {
                     result(1)
                     twVar.text = "/"
                     var1 = varResult
@@ -304,7 +338,7 @@ class IOSCalculatorFragment : Fragment(), View.OnClickListener {
                 } else if (var2 == null) {
                     var2 = twMonitor.text.toString().toFloat()
                     varResult = var1!! / var2!!
-                    twMonitor2.text = format(varResult!!).toString()
+                    twMonitor2.text = format(varResult!!)
                     twMonitor.text = ""
                     var1 = varResult
                     twVar.text = "/"
