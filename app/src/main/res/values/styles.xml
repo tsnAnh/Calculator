@@ -8,4 +8,29 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="baseCustomButton" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">16dp</item>
+        <item name="elevation">0dp</item>
+        <item name="strokeWidth">3dp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="strokeColor">#fff</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="numberButton" parent="baseCustomButton">
+        <item name="backgroundTint">#fff</item>
+        <item name="strokeColor">#aaa</item>
+        <item name="android:textColor">#000</item>
+    </style>
+
+    <style name="functionButton" parent="baseCustomButton">
+        <item name="backgroundTint">#1E88E5</item>
+    </style>
+
+    <style name="operatorButton" parent="baseCustomButton">
+        <item name="backgroundTint">#BBB</item>
+    </style>
+
 </resources>
