@@ -86,6 +86,12 @@ class IOSCalculatorFragment : Fragment(), View.OnClickListener {
                             twMonitor2.text = ""
                         }
                         pt === "/" -> {
+                            if (var2 == 0F) {
+                                Toast.makeText(this.activity!!, "Division by zero 9",
+                                        Toast.LENGTH_SHORT)
+                                        .show()
+                                return
+                            }
                             varResult = var1!! / var2!!
                             twMonitor.text = java.lang.String.valueOf(format(varResult!!))
                             twVar.text = ""
@@ -128,6 +134,12 @@ class IOSCalculatorFragment : Fragment(), View.OnClickListener {
                             twMonitor.text = ""
                         }
                         "/" -> {
+                            if (var2 == 0F) {
+                                Toast.makeText(this.activity!!, "Division by zero 9",
+                                        Toast.LENGTH_SHORT)
+                                        .show()
+                                return
+                            }
                             varResult = var1!!.div(var2!!)
                             twMonitor2.text = java.lang.String.valueOf(format(varResult!!))
                             twVar.text = ""
