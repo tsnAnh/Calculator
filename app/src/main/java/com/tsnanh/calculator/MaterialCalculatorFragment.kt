@@ -161,9 +161,12 @@ class MaterialCalculatorFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun formatNumber(number: Double): String {
-        val decimalFormat = DecimalFormat("###.##")
-        return decimalFormat.format(number)
+    companion object {
+        @JvmStatic
+        fun formatNumber(number: Double): String {
+            val decimalFormat = DecimalFormat("###.##")
+            return decimalFormat.format(number)
+        }
     }
 
     private fun calculate() {
